@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import droneService from './services/GetDrones'
+import ndzService from './services/FilterNDZ'
+import pilotService from './services/GetPilot'
 
 const App = () => {
-  var [drones, setDrones] = useState([])
+  var [drones, setDrones] = useState([]) // This can be removed later
+  var [ndzDrones, setNdzDrones] = useState([])
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      axios
-        .get('https://cors-anywhere.herokuapp.com/https://assignments.reaktor.com/birdnest/drones')
-        .then(response => {
-          let parser = new DOMParser()
-          let xmlDOM = parser.parseFromString(response.data, 'text/xml')      
-          setDrones(xmlDOM)
-          console.log(response.data)
-        })
+    setInterval(async () => {
+
+      let allDrones = await droneService.getAll()
+      setDrones(allDrones)
+      setNdzDrones(ndzService.filterAll(allDrones))
+      
     }, 2000)
   }, [])
 
-  return (console.log('Hello World'))
+  console.log('All drones: ', drones)
+  console.log('NDZ drones: ', ndzDrones)
+
+  ndzDrones.forEach(async drone => {
+    let pilot = await pilotService.getPilot(drone.serialNumber)
+
+    console.log('Pilot: ', pilot.firstName, pilot.lastName, 
+      'Phone: ', pilot.phoneNumber, 'Email: ', pilot.email)
+  })
 }
 
 export default App
