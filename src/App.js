@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-import droneService from './services/GetDrones'
-import ndzService from './services/FilterNDZ'
-import pilotService from './services/GetPilot'
+import droneService from './services/getDrones'
+import ndzService from './services/filterNDZ'
+import pilotService from './services/getPilot'
 
 import Pilot from './components/Pilot'
 
@@ -17,8 +17,13 @@ const App = () => {
 
       ndzDrones.forEach(drone => {
         let getPilot = pilotService.getPilot(drone.serialNumber)
-        let pilot = { ...getPilot, distance: drone.distance }
-        setPilots(pilots => [...pilots, pilot])
+        let pilot = { ...getPilot, distance: drone.distance, 
+          droneSerialNumber: drone.serialNumber }
+
+        setPilots(pilots => 
+          pilots.filter(pilot => pilot.droneSerialNumber !== drone.serialNumber)
+                .concat(pilot)
+        )
       })
     }, 2000)
     return () => clearInterval(interval)
@@ -37,12 +42,7 @@ const App = () => {
         </thead>
 
         <tbody >
-          {pilots.map(pilot => 
-            <Pilot 
-              key={pilot.id} 
-              pilot={pilot} 
-            />
-          )}
+          { pilots.map(pilot => <Pilot key={pilot.id} pilot={pilot} /> )}
         </tbody>
 
       </table>
