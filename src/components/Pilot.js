@@ -1,5 +1,5 @@
 const Pilot = ( { pilot } ) => {
-    let convertedDistance = (pilot.distance / 1000).toFixed(2)
+    let convertedDistance = (pilot.distance / 1000).toFixed(1)
     
     return (
         <tr>
