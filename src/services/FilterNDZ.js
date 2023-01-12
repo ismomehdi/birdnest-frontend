@@ -1,28 +1,34 @@
 // The drones within the NDZ are calculated by using the 
 // distance formula:
 //
-// D = sqrt((drone.X - ndzX)^2 + (drone.Y - ndzY)^2)
+// d = sqrt((drone.X - ndzX)^2 + (drone.Y - ndzY)^2)
 //
-// The drone is within the NDZ if D <= ndzRadius.
+// The drone is within the NDZ if d <= ndzRadius.
 
 
-const filterAll = (drones) => {
+const filterNDZ = (drones) => {
     const ndzRadius = 100000
     const ndzX = 250000
     const ndzY = 250000
 
-    const isWithinNDZ = (drone) => 
+    const getDistance = (drone) => {
+        var d = Math.sqrt(
 
-            Math.sqrt(
+            (drone.X - ndzX) ** 2 + 
+            (drone.Y - ndzY) ** 2
 
-                (drone.X - ndzX) ** 2 + 
-                (drone.Y - ndzY) ** 2
+        )
 
-            ) <= ndzRadius
+        return d
+    }
 
-    drones.forEach(drone => console.log('DRONE X: ', drone.X, 'DRONE Y: ', drone.Y, 'IS WITHIN NDZ: ', isWithinNDZ(drone)))
+    const isWithinNDZ = (d) => 
+        d <= ndzRadius
 
-    return drones.filter(drone => isWithinNDZ(drone))
+    var dronesWithDistance = drones.map(drone => ({ ...drone, distance: getDistance(drone) }))
+    var ndzDrones = dronesWithDistance.filter(drone => isWithinNDZ(drone.distance))
+
+    return ndzDrones
 }
 
-export default { filterAll }
+export default { filterNDZ }

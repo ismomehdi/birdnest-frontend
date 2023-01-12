@@ -1,31 +1,54 @@
 import { useState, useEffect } from 'react'
+
 import droneService from './services/GetDrones'
 import ndzService from './services/FilterNDZ'
 import pilotService from './services/GetPilot'
 
+import Pilot from './components/Pilot'
+
 const App = () => {
-  var [drones, setDrones] = useState([]) // This can be removed later
-  var [ndzDrones, setNdzDrones] = useState([])
+  const [pilots, setPilots] = useState([])
 
   useEffect(() => {
-    setInterval(async () => {
-
-      let allDrones = await droneService.getAll()
-      setDrones(allDrones)
-      setNdzDrones(ndzService.filterAll(allDrones))
+    const interval = setInterval(async () => {
       
+      let allDrones = await droneService.getDrones()
+      let ndzDrones = await ndzService.filterNDZ(allDrones)
+
+      ndzDrones.forEach(drone => {
+        let getPilot = pilotService.getPilot(drone.serialNumber)
+        let pilot = { ...getPilot, distance: drone.distance }
+        setPilots(pilots => [...pilots, pilot])
+      })
     }, 2000)
+    return () => clearInterval(interval)
   }, [])
 
-  console.log('All drones: ', drones)
-  console.log('NDZ drones: ', ndzDrones)
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Pilot</th>
+            <th>Email</th>
+            <th>Number</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
 
-  ndzDrones.forEach(async drone => {
-    let pilot = await pilotService.getPilot(drone.serialNumber)
+        <tbody >
+          {pilots.map(pilot => 
+            <Pilot 
+              key={pilot.id} 
+              pilot={pilot} 
+            />
+          )}
+        </tbody>
 
-    console.log('Pilot: ', pilot.firstName, pilot.lastName, 
-      'Phone: ', pilot.phoneNumber, 'Email: ', pilot.email)
-  })
+      </table>
+    </div>
+  )
+
 }
 
 export default App

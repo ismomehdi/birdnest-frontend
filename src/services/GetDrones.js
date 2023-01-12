@@ -1,3 +1,4 @@
+import axios from 'axios'
 import XMLParser from 'react-xml-parser'
 
 const xmlTest = `<report>
@@ -71,7 +72,11 @@ const xmlTest = `<report>
 </capture>
 </report>`
 
-const getAll = () => {
+const getDrones = () => {
+    //var data = axios
+    //                .get('https://proxy.cors.sh/https://assignments.reaktor.com/birdnest/drones')
+    //                .then (response => response.data)
+
     var xml = new XMLParser().parseFromString(xmlTest)
     
     let allDrones = xml
@@ -87,9 +92,4 @@ const getAll = () => {
     return allDrones
 }
 
-export default { getAll }
-
-//axios
-//  .get('https://cors-anywhere.herokuapp.com/https://assignments.reaktor.com/birdnest/drones')
-//  .then(response => {
-//  })
+export default { getDrones }
