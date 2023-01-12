@@ -5,9 +5,11 @@ import ndzService from './services/filterNDZ'
 import pilotService from './services/getPilot'
 
 import Pilot from './components/Pilot'
+import ClosestDistance from './components/ClosestDistance'
 
 const App = () => {
   const [pilots, setPilots] = useState([])
+  const [closestDistance, setClosestDistance] = useState(null)
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -20,6 +22,10 @@ const App = () => {
         let pilot = { ...getPilot, distance: drone.distance, 
           droneSerialNumber: drone.serialNumber }
 
+        if (drone.distance < closestDistance || closestDistance === null) {
+          setClosestDistance(drone.distance)
+        }
+
         setPilots(pilots => 
           pilots.filter(pilot => pilot.droneSerialNumber !== drone.serialNumber)
                 .concat(pilot)
@@ -31,6 +37,7 @@ const App = () => {
 
   return (
     <div>
+      <ClosestDistance closestDistance={closestDistance} />
       <table>
         <thead>
           <tr>
@@ -42,7 +49,7 @@ const App = () => {
         </thead>
 
         <tbody >
-          { pilots.map(pilot => <Pilot key={pilot.id} pilot={pilot} /> )}
+          { pilots.map(pilot => <Pilot key={pilot.droneSerialNumber} pilot={pilot} /> )}
         </tbody>
 
       </table>
