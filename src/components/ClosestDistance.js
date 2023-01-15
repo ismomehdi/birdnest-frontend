@@ -1,12 +1,9 @@
-const ClosestDistance = ( { closestDistance } ) => {
-    let convertedDistance = (closestDistance / 1000).toFixed(1)
-
-    if (closestDistance === null) {
-        return
-    }
+const ClosestDistance = ( { obj } ) => {
+    if (obj === null || obj === undefined) return
+    let convertedDistance = (obj.droneDistance / 1000).toFixed(1)
     
     return (
-        <p>Closest distance to the nest: {convertedDistance} meters</p>
+        <p>Closest distance to the nest: { convertedDistance } meters</p>
     )
 }
 
