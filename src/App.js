@@ -8,14 +8,15 @@ const App = () => {
   const [pilots, setPilots] = useState([])
   const [closest, setClosest] = useState(null)
 
-  //getAll(setPilots, setClosest)
+  //useEffect(() => 
+  //  { getAll(setPilots, setClosest) }, []
+  //)
 
-  useEffect(() => 
-    { getAll(setPilots, setClosest) }, [pilots, closest]
-  )
+  getAll(setPilots, setClosest)
 
-  // console.log(pilots)
-  // console.log(closest)
+  //setInterval(() => {
+  //  getAll(setPilots, setClosest)
+  //}, 2000)
 
   return (
     <div>
