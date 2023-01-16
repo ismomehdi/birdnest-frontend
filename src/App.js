@@ -4,12 +4,11 @@ import Pilot from './components/Pilot'
 import ClosestDistance from './components/ClosestDistance'
 
 const socketUrl = 'ws://127.0.0.1:3001/'
-
 const ws = new WebSocket(socketUrl)
 
 const App = () => {
   const [pilots, setPilots] = useState([])
-  const [closest, setClosest] = useState(null)
+  const [closestDistance, setClosest] = useState(null)
 
   useEffect(() => {
     ws.onmessage = (e) => {
@@ -20,12 +19,11 @@ const App = () => {
       setPilots(pilotsTemp.sort())
       setClosest(closestTemp[0])
     }
-
   }, [])
 
   return (
     <div>
-      <ClosestDistance obj={closest} />
+      <ClosestDistance obj={closestDistance} />
       <table>
         <thead>
           <tr>
@@ -43,7 +41,6 @@ const App = () => {
       </table>
     </div>
   )
-
 }
 
 export default App
