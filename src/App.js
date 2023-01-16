@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Pilot from './components/Pilot'
 import ClosestDistance from './components/ClosestDistance'
-import getAll from './services/getAll'
+
+const socketUrl = 'ws://127.0.0.1:3001/'
+
+const ws = new WebSocket(socketUrl)
 
 const App = () => {
   const [pilots, setPilots] = useState([])
   const [closest, setClosest] = useState(null)
 
-  //useEffect(() => 
-  //  { getAll(setPilots, setClosest) }, []
-  //)
+  useEffect(() => {
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data)
+      const closestTemp = data.filter(obj => obj['category'] === 'closestDistance')
+      const pilotsTemp = data.filter(obj => obj['category'] === 'pilot')
 
-  getAll(setPilots, setClosest)
+      setPilots(pilotsTemp.sort())
+      setClosest(closestTemp[0])
+    }
 
-  //setInterval(() => {
-  //  getAll(setPilots, setClosest)
-  //}, 2000)
+  }, [])
 
   return (
     <div>
@@ -30,9 +35,9 @@ const App = () => {
             <th>Distance</th>
           </tr>
         </thead>
-
+      
         <tbody >
-          { pilots.map(pilot => <Pilot key={pilot.droneSerialNumber} pilot={pilot} /> )}
+        { pilots.map(pilot => <Pilot key={pilot.droneSerialNumber} pilot={pilot} /> )}    
         </tbody>
 
       </table>
