@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Typography } from '@material-ui/core'
+import CustomTable from './ui/table'
 
-import Pilot from './components/Pilot'
-import ClosestDistance from './components/ClosestDistance'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import Link from '@material-ui/core/Link'
 
 const socketUrl = 'ws://127.0.0.1:3001/'
 const ws = new WebSocket(socketUrl)
@@ -22,25 +26,31 @@ const App = () => {
   }, [])
 
   return (
-    <div>
-      <ClosestDistance obj={closestDistance} />
-      <table>
-        <thead>
-          <tr>
-            <th>Pilot</th>
-            <th>Email</th>
-            <th>Number</th>
-            <th>Distance</th>
-          </tr>
-        </thead>
-      
-        <tbody >
-        { pilots.map(pilot => <Pilot key={pilot.droneSerialNumber} pilot={pilot} /> )}    
-        </tbody>
+    <div style={{ marginTop: '50px' }}>
 
-      </table>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <Typography variant="h2" gutterBottom> Project Birdnest </Typography>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+        { CustomTable(pilots, closestDistance) }
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
+        <Link href="https://github.com/ismomehdi">        
+          <GitHubIcon color="grey" fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
+        </Link>
+        
+        <Link href="https://www.linkedin.com/in/ismo-mehdi-973aa01a9/">
+          <LinkedInIcon fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
+        </Link>
+
+        <Link href="https://www.instagram.com/prodbywngmn/">
+          <InstagramIcon color="black" fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
+        </Link>
+      </div>
+
     </div>
-  )
-}
+  )}
 
 export default App
