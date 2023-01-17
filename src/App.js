@@ -44,11 +44,11 @@ const App = () => {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
-        <Link href="https://github.com/ismomehdi">        
+        <Link href="https://github.com/ismomehdi/birdnest/">        
           <GitHubIcon color="grey" fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
         </Link>
         
-        <Link href="https://www.linkedin.com/in/ismo-mehdi-973aa01a9/">
+        <Link href="https://www.linkedin.com/in/ismo-muusavi/">
           <LinkedInIcon fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
         </Link>
 
