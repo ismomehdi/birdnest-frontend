@@ -7,7 +7,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import Link from '@material-ui/core/Link'
 
-const socketUrl = 'ws://127.0.0.1:3001/'
+const socketUrl = 'ws://spring-moon-3266.fly.dev//'
 const ws = new WebSocket(socketUrl)
 
 const App = () => {

@@ -75,8 +75,7 @@ function TablePaginationActions(props) {
 TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired
 };
 
 export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
@@ -157,6 +156,7 @@ export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
                     page={page}
                     onPageChange={handleChangePage}
                     ActionsComponent={TablePaginationActions}
+                    rowsPerPageOptions={[]}
                     />
 
                 </TableRow>
