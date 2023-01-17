@@ -44,7 +44,7 @@ const App = () => {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '25px'}}>
-        <Link href="https://github.com/ismomehdi/birdnest/">        
+        <Link href="https://github.com/ismomehdi/birdnest-backend/">        
           <GitHubIcon color="grey" fontSize="large" style={{ color: 'black', marginRight: '40px' }} />
         </Link>
         
