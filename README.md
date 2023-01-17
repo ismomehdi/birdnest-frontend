@@ -4,7 +4,7 @@ This is a [pre-assignment](https://assignments.reaktor.com/birdnest/) for a Reak
 
 Take a look at the app [here](https://spring-moon-3266.fly.dev/).
 
-This is the frontend repository. The backend is [here](https://github.com/ismomehdi/birdnest-backend/).
+NOTE: This is the frontend repository. The backend is [here](https://github.com/ismomehdi/birdnest-backend/).
 
 ## About the Frontend
 
