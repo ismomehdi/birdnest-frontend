@@ -133,7 +133,7 @@ export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
                         {pilot.phoneNumber}
                     </TableCell>
                     <TableCell style={{ width: 170 }} align="right">
-                        {(pilot.droneDistance / 1000).toFixed(1)}
+                        {(pilot.droneDistance / 1000).toFixed(1)}m
                     </TableCell>
                     </TableRow>
                 ))}
