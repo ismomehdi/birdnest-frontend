@@ -97,8 +97,8 @@ export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
     let convertedDistance = (ClosestDistance.droneDistance / 1000).toFixed(2)
 
     return (
-        <TableCell align="left" colSpan={1} >
-            <Typography variant="subtitle3"> Closest distance to the nest so far is { convertedDistance } meters. </Typography>
+        <TableCell align="left" colSpan={2} >
+            <Typography variant="subtitle3"> So far, the closest distance to the nest is { convertedDistance } meters. </Typography>
         </TableCell>
     )
   }
