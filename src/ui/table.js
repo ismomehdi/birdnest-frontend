@@ -98,7 +98,7 @@ export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
 
     return (
         <TableCell align="left" colSpan={1} >
-            <Typography variant="subtitle3"> Closest confirmed distance to the nest is { convertedDistance } meters. </Typography>
+            <Typography variant="subtitle3"> Closest distance to the nest so far is { convertedDistance } meters. </Typography>
         </TableCell>
     )
   }
@@ -113,7 +113,7 @@ export default function CustomPaginationActionsTable(pilots, ClosestDistance) {
                 <TableCell>Full Name</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell align="right">Phone Number</TableCell>
-                <TableCell align="right">Distance</TableCell>
+                <TableCell align="right">Closest Distance</TableCell>
             </TableRow>
             </TableHead>
 
