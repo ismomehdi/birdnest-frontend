@@ -27,7 +27,7 @@ const App = () => {
       const closestTemp = data.filter(obj => obj['category'] === 'closestDistance')
       const pilotsTemp = data.filter(obj => obj['category'] === 'pilot')
 
-      setPilots(pilotsTemp.sort())
+      setPilots(pilotsTemp.sort().reverse())
       setClosest(closestTemp[0])
     }
   }, [])
